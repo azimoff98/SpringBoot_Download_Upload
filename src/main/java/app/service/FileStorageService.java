@@ -27,7 +27,7 @@ public class FileStorageService {
     private ImageRepository repository;
 
 
-    public Image storeFile(MultipartFile file){
+    public Image storeFile(MultipartFile file,Integer id){
         //Normalize filename
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -38,6 +38,7 @@ public class FileStorageService {
             }
 
             Image image = new Image(filename, file.getContentType(), file.getBytes());
+            image.setId(id);
 
             return repository.save(image);
         }catch (IOException ex){

@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="guideuploadingfiles" />
+        <module name="SpringBoot_Download_Upload" />
       </profile>
     </annotationProcessing>
   </component>

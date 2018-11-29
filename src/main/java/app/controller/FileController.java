@@ -27,8 +27,9 @@ public class FileController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file){
-        Image image = fileStorageService.storeFile(file);
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@RequestHeader("id") Integer id){
+        System.out.println(id);
+        Image image = fileStorageService.storeFile(file,id);
 
         String fileDownloadUri = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("downloadFile/").path(image.getId().toString()).toUriString();
@@ -39,10 +40,10 @@ public class FileController {
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
+    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files,@RequestHeader("id") Integer id){
         return Arrays.asList(files)
                 .stream()
-                .map(file -> uploadFile(file))
+                .map(file -> uploadFile(file,id))
                 .collect(Collectors.toList());
     }
 
